@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
@@ -34,7 +35,7 @@ namespace RedirectStdouts
             ProcessStartInfo processStartInfo = redirProgram.StartInfo;
             processStartInfo.CreateNoWindow = false;
             processStartInfo.FileName = args[0];
-            if (args.Length > 1) processStartInfo.Arguments = arrayToString(removeFirstArg(args));
+            if (args.Length >= 1) processStartInfo.Arguments = args[1];
             processStartInfo.ErrorDialog = true;
             processStartInfo.RedirectStandardError = true;
             processStartInfo.RedirectStandardOutput = true;
@@ -75,21 +76,6 @@ namespace RedirectStdouts
                 line += streamStdErr.ReadLine() + Environment.NewLine;
                 Console.WriteLine(line);
             }
-        }
-        static string[] removeFirstArg(string[] remove) {
-            string[] new_arg = new string[] { };
-            for (int i = 0; i > remove.Length - 1; i++) {
-                if (i == 0) continue;
-                new_arg[i] = remove[i];
-            }
-            return new_arg;
-        }
-        static string arrayToString(string[] arr) {
-            string ret = "";
-            for (int i = 0; i < arr.Length; i++) {
-                ret += arr[i];
-            }
-            return ret;
         }
     }
 }
