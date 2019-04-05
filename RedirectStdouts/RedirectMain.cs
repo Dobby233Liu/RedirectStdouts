@@ -29,6 +29,8 @@ namespace RedirectStdouts
             processStartInfo.RedirectStandardOutput = true;
             processStartInfo.UseShellExecute = false;
             redirProgram.Start();
+            streamStdErr = redirProgram.StandardError;
+            streamStdOut = redirProgram.StandardOutput;
             Task rd1 = new Task(read1, ct);
             Task rd2 = new Task(read2, ct);
             rd1.Start();
