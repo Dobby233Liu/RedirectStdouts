@@ -21,10 +21,9 @@ namespace RedirectStdouts
             Process redirProgram = new Process();
             ProcessStartInfo processStartInfo = redirProgram.StartInfo;
             processStartInfo.CreateNoWindow = false;
-            string[] argsForProgram = args;
+            processStartInfo.FileName = args[0];
             if (args.Length > 1) processStartInfo.Arguments = arrayToString(removeFirstArg(args));
             processStartInfo.ErrorDialog = true;
-            processStartInfo.FileName = args[0];
             processStartInfo.RedirectStandardError = true;
             processStartInfo.RedirectStandardOutput = true;
             processStartInfo.UseShellExecute = false;
@@ -38,6 +37,7 @@ namespace RedirectStdouts
             redirProgram.WaitForExit();
             exited = true;
             cts.Cancel();
+            cts.Dispose();
             rd1.Dispose();
             rd2.Dispose();
             redirProgram.Dispose();
@@ -61,14 +61,15 @@ namespace RedirectStdouts
         }
         static string[] removeFirstArg(string[] remove) {
             string[] new_arg = new string[] { };
-            for (int i = 1; i > remove.Length - 1; i++) {
+            for (int i = 0; i > remove.Length - 1; i++) {
+                if (i == 0) continue;
                 new_arg[i] = remove[i];
             }
             return new_arg;
         }
         static string arrayToString(string[] arr) {
             string ret = "";
-            for (int i = 0; i < arr.Length - 1; i++) {
+            for (int i = 0; i < arr.Length; i++) {
                 ret += arr[i];
             }
             return ret;
