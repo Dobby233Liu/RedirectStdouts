@@ -64,7 +64,7 @@ namespace RedirectStdouts
             string line = null;
             while (!streamStdOut.EndOfStream && !exited)
             {
-                line += streamStdOut.ReadLine() + Environment.NewLine;
+                line = streamStdOut.ReadLine();
                 Console.WriteLine(line);
             }
         }
@@ -73,7 +73,7 @@ namespace RedirectStdouts
             string line = null;
             while (!streamStdErr.EndOfStream && !exited)
             {
-                line += streamStdErr.ReadLine() + Environment.NewLine;
+                line = streamStdErr.ReadLine();
                 Console.WriteLine(line);
             }
         }
