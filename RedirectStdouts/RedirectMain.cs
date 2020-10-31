@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -17,7 +17,7 @@ namespace RedirectStdouts
         {
             redirProgram.Kill();
             redirProgram.Close();
-            exited = True;
+            exited = true;
             Environment.Exit(1);
         }
 
