@@ -35,7 +35,7 @@ namespace RedirectStdouts
             ProcessStartInfo processStartInfo = redirProgram.StartInfo;
             processStartInfo.CreateNoWindow = false;
             processStartInfo.FileName = args[0];
-            if (args.Length >= 1) processStartInfo.Arguments = args[1];
+            if (args.Length > 1) processStartInfo.Arguments = args[1];
             processStartInfo.ErrorDialog = true;
             processStartInfo.RedirectStandardError = true;
             processStartInfo.RedirectStandardOutput = true;
