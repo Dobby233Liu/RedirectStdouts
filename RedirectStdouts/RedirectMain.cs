@@ -17,7 +17,7 @@ namespace RedirectStdouts
         {
             redirProgram.Kill();
             redirProgram.Close();
-            Console.Clear();
+            exited = True;
             Environment.Exit(1);
         }
 
