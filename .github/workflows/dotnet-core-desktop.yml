@@ -14,10 +14,13 @@ jobs:
       with:
         fetch-depth: 0
 
-    # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
+      uses: microsoft/setup-msbuild@master
 
-    # Create the app package by building and packaging the Windows Application Packaging project
     - name: Build
       run: msbuild RedirectStdouts\RedirectStdouts.sln /p:Configuration=Release
+    
+    - uses: actions/upload-artifact@v2
+      with:
+        name: "exe"
+        path: RedirectStdouts\bin\Release\RedirectStdouts.exe
