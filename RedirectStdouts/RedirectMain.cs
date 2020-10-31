@@ -17,14 +17,12 @@ namespace RedirectStdouts
         {
             redirProgram.Kill();
             redirProgram.Close();
-            exited = true;
             Environment.Exit(1);
         }
 
         static StreamReader streamStdOut = null;
         static StreamReader streamStdErr = null;
         static Process redirProgram = null;
-        static bool exited = false;
         static void Main(string[] args)
         {
             var cts = new CancellationTokenSource();
@@ -51,26 +49,15 @@ namespace RedirectStdouts
             rd2.Start();
 
             redirProgram.WaitForExit();
-            exited = true;
-
-            cts.Cancel();
-            cts.Dispose();
-            rd1.Dispose();
-            rd2.Dispose();
-
             redirProgram.Close();
         }
         static void read1() {
-            while (!streamStdOut.EndOfStream || !exited)
-            {
+            while (!streamStdOut.EndOfStream)
                 Console.WriteLine(streamStdOut.ReadLine());
-            }
         }
         static void read2(){
-            while (!streamStdErr.EndOfStream || !exited)
-            {
+            while (!streamStdErr.EndOfStream)
                 Console.WriteLine(streamStdErr.ReadLine());
-            }
         }
     }
 }
