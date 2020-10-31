@@ -61,20 +61,15 @@ namespace RedirectStdouts
             redirProgram.Close();
         }
         static void read1() {
-            string line = null;
-            while (!streamStdOut.EndOfStream && !exited)
+            while (!streamStdOut.EndOfStream || !exited)
             {
-                line = streamStdOut.ReadLine();
-                Console.WriteLine(line);
+                Console.WriteLine(streamStdOut.ReadLine());
             }
         }
-        static void read2()
-        {
-            string line = null;
-            while (!streamStdErr.EndOfStream && !exited)
+        static void read2(){
+            while (!streamStdErr.EndOfStream || !exited)
             {
-                line = streamStdErr.ReadLine();
-                Console.WriteLine(line);
+                Console.WriteLine(streamStdErr.ReadLine());
             }
         }
     }
